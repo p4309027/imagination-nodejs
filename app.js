@@ -11,13 +11,14 @@ const checkApiKey = (req, res, next) => {
 	const headerApiKey = req.header('x-api-key');
 	if (headerApiKey !== apiKey) {
 		res.status(401).send({ message: 'Unauthorised' });
+	} else {
+		next();
 	}
-	next();
 };
 app.use(checkApiKey);
 
 import { teamsRouter } from './routes/teams.js';
-import { playersRouter }from './routes/players.js';
+import { playersRouter } from './routes/players.js';
 import { resultsRouter } from './routes/results.js';
 
 app.use('/teams', teamsRouter);
